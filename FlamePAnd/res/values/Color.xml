@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    
+    
+    
+		<!-- 背景色　メニュー -->
+		<color name="background_menu">#7FBFBF</color>
+		<!-- 文字色 -->
+		<color name="character_color">#000000</color>
+		<color name="orenge_color">#FF9F3F</color>
+		<color name="red_color">#FF0000</color>
+		<color name="yelow_color">#FFFF00</color>
+		<color name="blue_color">#0000FF</color>
+		    		    		    		    		    
+		    
+		<!-- list非選択時背景色 -->
+		<color name ="list_non_selection_color">#FFFFFF</color>
+		<!-- list選択時背景色 -->
+		<color name ="list_selection_color">#A6D513</color>
+		<!-- 背景透過色 -->
+		<color name="background_penetration_color">#00000000</color>
+		<!-- 背景色　灰 -->
+		<color name="background_gray">#F1F1F1</color>
+		    
+		    
+		    
+		    
+		    
+		    
+		    		<!-- 背景色　緑 -->
+
+
+		<color name="background_green">#22DD22</color>
+		<!-- 背景色　白 -->
+		<color name="background_white">#FFFFFF</color>
+
+		<!-- 画像背景色 -->
+		<color name="imageView_background_color">@color/background_penetration_color</color>
+		<!-- ボタン背景色 -->
+		<color name="imagebutton_background_color">@color/background_penetration_color</color>
+		<!-- タイトルバー背景色 -->
+		<color name="title_background_color">#000000</color>
+		<!-- タイトルバー文字色 -->
+		<color name="title_character_color">#FFFFFF</color>
+		<!-- textView背景色 -->
+		<color name="textView_background_color">@color/background_penetration_color</color>
+		<!-- textView文字色 -->
+		<color name="textView_character_color">@color/character_color</color>
+		<!-- textView強調文字色 -->
+		<color name="textView_emphasis_Character_color">#FF7A00</color>
+		<!-- textView極強調文字色 -->
+		<color name="textView_high_emphasis_Character_color">#FF4500</color>
+		<!-- textView非強調文字色 -->
+		<color name="textView_non_emphasis_Character_color">#7B7B7B</color>
+		<!-- editText背景色 -->
+		<color name="editText_background_color">@color/background_penetration_color</color>
+		<!-- editText文字色 -->
+		<color name="editText_character_color">@color/character_color</color>
+		<!-- editTextヒント文字色 -->
+		<color name="editText_hint_character_color">#848284</color>
+		<!-- editTextハイライト文字色 -->
+		<color name="editText_highlight_character_color">#FF9200</color>
+		<!-- listユーザー名文字色 -->
+		<color name ="list_user_character_color">@color/character_color</color>
+		<!-- list本文文字色 -->
+		<color name ="list_text_character_color">@color/character_color</color>
+		<!-- list時間文字色 -->
+		<color name ="list_time_character_color">#7B7B7B</color>
+		<!-- list電話番号文字色 -->
+		<color name ="list_telephon_character_color">#0064FF</color>
+
+		<!-- list境界線色(白） -->
+		<color name="list_divider_color_white">#FFFFFF</color>
+		<!-- list境界線色(灰） -->
+		<color name="list_divider_color_gray">#7B7B7B</color>
+		<!-- list境界線色(薄灰） -->
+		<color name="list_divider_color_gray2">#CFCFCF</color>
+		<!-- list境界線色(ベージュ） -->
+		<color name="list_divider_color_beige">#F5F5DC</color>
+		<!-- list境界線色(緑） -->
+		<color name="list_divider_color_green">#A6D513</color>
+		<!-- サブタイトル背景色 -->
+		<color name="sub_title_background_color">#A6D513</color>
+		<!-- サブタイトル文字色 -->
+		<color name="sub_title_character_color">#FFFFFF</color>
+		<!-- 評価文字色 -->
+		<color name="evaluation_character_color">#FF7E00</color>
+		<!-- タブ背景色 -->
+		<color name="tab_background_color">#F7F3F7</color>
+		<!-- アイコン枠色 -->
+		<color name="icon_border_color">#CECECE</color>
+
+		<color name="icon_noimage_color">#FEFEFE</color>
+ </resources>

@@ -1,0 +1,12 @@
+
+    <resources>
+        <string name="money">0</string>
+        <string name="sound">40</string>
+        <string name="Var">1</string>
+        <string name="shop">0</string>
+        <string name="lank">0</string>
+        <string name="Equip">1</string>
+        <string name="se">40</string>
+        <string name="money_all">0</string>
+        <string name="destroy_all">0</string>
+    </resources>

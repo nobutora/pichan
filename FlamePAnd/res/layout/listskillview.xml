@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"   
+      android:orientation="vertical"  
+      android:layout_width="fill_parent"    
+      android:layout_height="fill_parent">    
+      	<LinearLayout
+          android:layout_width="fill_parent"
+          android:layout_height="wrap_content"
+          android:background="@color/orenge_color"
+          android:orientation="horizontal"
+          android:weightSum="1" >
+
+          <TextView
+              android:id="@+id/textViewTitle"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:gravity="center"
+              android:text="ショップ"
+              android:textColor="@color/character_color"
+              android:textSize="35sp" />
+          
+    </LinearLayout>
+      
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="189dp"
+        android:orientation="horizontal"
+        android:background="@drawable/haikei" 
+        android:id="@+id/skill_view"
+        android:weightSum="1" >
+
+        <TextView
+            android:id="@+id/TextManey"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.26"
+            android:text="TextView"
+            android:textColor="@color/character_color"
+            android:textSize="20sp" />
+
+    </LinearLayout>
+     
+      <LinearLayout
+          android:layout_width="fill_parent"
+          android:layout_height="wrap_content"
+          android:background="@color/orenge_color"
+          android:orientation="horizontal"
+          android:weightSum="1" >
+
+          <Button
+              android:id="@+id/button_category"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_gravity="left"
+              android:onClick="back"
+              android:overScrollMode="ifContentScrolls"
+              android:textSize="20sp"
+              android:text="戻る" >
+</Button>
+
+          <TextView
+              android:id="@+id/textViewHelp"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_weight="0.26"
+              android:textSize="15sp"
+		      android:textColor="@color/character_color"
+              android:text="TextView" />
+          
+      </LinearLayout>
+            
+            
+      <ListView android:id="@+id/listviewItem"   
+          android:background="@drawable/haikei"
+          android:layout_width="fill_parent"      
+          android:textColor="@color/character_color"
+          android:layout_height="wrap_content" />  
+</LinearLayout>

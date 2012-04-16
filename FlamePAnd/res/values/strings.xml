@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="hello">Hello World, FlamePAndActivity!</string>
+    <string name="app_name">ぴーちゃんのバーニング</string>
+    <!-- <string name="app_name">FlamePAnd</string> -->
+    <string name="test">押してね</string>
+    <string name="load">ロード中</string>
+        
+</resources>

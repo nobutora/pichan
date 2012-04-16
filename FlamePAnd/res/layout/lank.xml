@@ -1,0 +1,319 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+      android:layout_width="fill_parent"
+      android:layout_height="fill_parent"
+      android:background="@color/background_menu">
+
+	<LinearLayout android:weightSum="1"
+		android:id = "@+id/img1"		
+		android:layout_height="fill_parent" 
+		android:layout_width="fill_parent" 
+		android:orientation="vertical" 
+		xmlns:android="http://schemas.android.com/apk/res/android" android:scrollbars="vertical" android:scrollbarAlwaysDrawHorizontalTrack="true" android:scrollbarAlwaysDrawVerticalTrack="true">
+	
+			<LinearLayout
+			    android:layout_width="fill_parent"
+			    android:layout_height="wrap_content"
+			    android:orientation="horizontal"
+			    android:weightSum="1" >
+
+		    </LinearLayout>
+		      
+			<LinearLayout
+			    android:layout_width="fill_parent"
+			    android:layout_height="wrap_content"
+			    android:orientation="horizontal"
+			    android:weightSum="1" >
+
+		    </LinearLayout>
+
+			<LinearLayout
+			    android:layout_width="fill_parent"
+			    android:layout_height="50dp"
+			    android:orientation="horizontal"
+			    android:weightSum="1" >
+
+			    <TextView
+			        android:id="@+id/TextSoundName"
+			        android:layout_width="wrap_content"
+			        android:layout_height="wrap_content"
+			        android:layout_gravity="center"
+			        android:layout_marginLeft="66px"
+			        android:layout_weight="0.16"
+			        android:text="わーるどランキング"
+			        android:textColor="@color/red_color"
+			        android:textSize="25sp" />
+			</LinearLayout>    
+
+			<LinearLayout
+			        android:layout_width="fill_parent"
+			        android:layout_height="wrap_content"
+			        android:orientation="horizontal"
+			        android:weightSum="1" >
+
+			    <TextView
+			        android:id="@+id/Lank1"
+			        android:layout_width="wrap_content"
+			        android:layout_height="wrap_content"
+			        android:layout_gravity="center"
+			        android:layout_marginLeft="66px"
+			        android:layout_weight="0.68"
+			        android:text="1ST"
+			        android:textColor="@color/character_color"
+			        android:textSize="15sp" />
+			</LinearLayout>
+			
+			<LinearLayout
+			        android:layout_width="fill_parent"
+			        android:layout_height="wrap_content"
+			        android:orientation="horizontal"
+			        android:weightSum="1" >
+
+			    <TextView
+			        android:id="@+id/Lank2"
+			        android:layout_width="wrap_content"
+			        android:layout_height="wrap_content"
+			        android:layout_gravity="center"
+			        android:layout_marginLeft="66px"
+			        android:layout_weight="0.64"
+			        android:text="2ST"
+			        android:textColor="@color/character_color"
+			        android:textSize="15sp" />
+			</LinearLayout>    
+			<LinearLayout
+			        android:layout_width="fill_parent"
+			        android:layout_height="wrap_content"
+			        android:orientation="horizontal"
+			        android:weightSum="1" >
+
+			    <TextView
+			        android:id="@+id/Lank3"
+			        android:layout_width="wrap_content"
+			        android:layout_height="wrap_content"
+			        android:layout_gravity="center"
+			        android:layout_marginLeft="66px"
+			        android:layout_weight="0.65"
+			        android:text="3ST"
+			        android:textColor="@color/character_color"
+			        android:textSize="15sp" />
+			</LinearLayout>    
+			<LinearLayout
+			        android:layout_width="fill_parent"
+			        android:layout_height="wrap_content"
+			        android:orientation="horizontal"
+			        android:weightSum="1" >
+
+			    <TextView
+			        android:id="@+id/Lank4"
+			        android:layout_width="wrap_content"
+			        android:layout_height="wrap_content"
+			        android:layout_gravity="center"
+			        android:layout_marginLeft="66px"
+			        android:layout_weight="0.64"
+			        android:text="4ST"
+			        android:textColor="@color/character_color"
+			        android:textSize="15sp" />
+			</LinearLayout>
+			<LinearLayout
+			        android:layout_width="fill_parent"
+			        android:layout_height="wrap_content"
+			        android:orientation="horizontal"
+			        android:weightSum="1" >
+
+			    <TextView
+			        android:id="@+id/Lank5"
+			        android:layout_width="wrap_content"
+			        android:layout_height="wrap_content"
+			        android:layout_gravity="center"
+			        android:layout_marginLeft="66px"
+			        android:layout_weight="0.74"
+			        android:text="5ST"
+			        android:textColor="@color/character_color"
+			        android:textSize="15sp" />
+			</LinearLayout>
+			<LinearLayout
+			        android:layout_width="fill_parent"
+			        android:layout_height="wrap_content"
+			        android:orientation="horizontal"
+			        android:weightSum="1" >
+
+			    <TextView
+			        android:id="@+id/Lank6"
+			        android:layout_width="wrap_content"
+			        android:layout_height="wrap_content"
+			        android:layout_gravity="center"
+			        android:layout_marginLeft="66px"
+			        android:layout_weight="0.65"
+			        android:text="6ST"
+			        android:textColor="@color/character_color"
+			        android:textSize="15sp" />
+			</LinearLayout>
+			<LinearLayout
+			        android:layout_width="fill_parent"
+			        android:layout_height="wrap_content"
+			        android:orientation="horizontal"
+			        android:weightSum="1" >
+
+			    <TextView
+			        android:id="@+id/Lank7"
+			        android:layout_width="wrap_content"
+			        android:layout_height="wrap_content"
+			        android:layout_gravity="center"
+			        android:layout_marginLeft="66px"
+			        android:layout_weight="0.65"
+			        android:text="7ST"
+			        android:textColor="@color/character_color"
+			        android:textSize="15sp" />
+			</LinearLayout>
+			<LinearLayout
+			        android:layout_width="fill_parent"
+			        android:layout_height="wrap_content"
+			        android:orientation="horizontal"
+			        android:weightSum="1" >
+
+			    <TextView
+			        android:id="@+id/Lank8"
+			        android:layout_width="wrap_content"
+			        android:layout_height="wrap_content"
+			        android:layout_gravity="center"
+			        android:layout_marginLeft="66px"
+			        android:layout_weight="0.67"
+			        android:text="8ST"
+			        android:textColor="@color/character_color"
+			        android:textSize="15sp" />
+			</LinearLayout>
+			<LinearLayout
+			        android:layout_width="fill_parent"
+			        android:layout_height="wrap_content"
+			        android:orientation="horizontal"
+			        android:weightSum="1" >
+
+			    <TextView
+			        android:id="@+id/Lank9"
+			        android:layout_width="wrap_content"
+			        android:layout_height="wrap_content"
+			        android:layout_gravity="center"
+			        android:layout_marginLeft="66px"
+			        android:layout_weight="0.69"
+			        android:text="9ST"
+			        android:textColor="@color/character_color"
+			        android:textSize="15sp" />
+			</LinearLayout>
+			<LinearLayout
+			        android:layout_width="fill_parent"
+			        android:layout_height="wrap_content"
+			        android:orientation="horizontal"
+			        android:weightSum="1" >
+
+			    <TextView
+			        android:id="@+id/Lank10"
+			        android:layout_width="wrap_content"
+			        android:layout_height="wrap_content"
+			        android:layout_gravity="center"
+			        android:layout_marginLeft="66px"
+			        android:layout_weight="0.69"
+			        android:text="10ST"
+			        android:textColor="@color/character_color"
+			        android:textSize="15sp" />
+			</LinearLayout>
+			
+			<LinearLayout
+			    android:layout_width="fill_parent"
+			    android:layout_height="48dp"
+			    android:orientation="vertical"
+			    android:weightSum="1" >
+
+				<LinearLayout
+				    android:layout_width="fill_parent"
+				    android:layout_height="48dp"
+				    android:orientation="vertical"
+				    android:weightSum="1" >
+
+				    <TextView
+				        android:id="@+id/TextView01"
+				        android:layout_width="wrap_content"
+				        android:layout_height="wrap_content"
+				        android:text="自分のレコード"
+				        android:textColor="@color/yelow_color"
+				        android:textSize="20sp" />
+
+				    <TextView
+				        android:id="@+id/TextMyManey"
+				        android:layout_width="272dp"
+				        android:layout_height="wrap_content"
+				        android:text="10000000000羊"
+				        android:textColor="@color/character_color"
+				        android:textSize="20sp" />
+				</LinearLayout>
+
+
+				    
+				    
+			</LinearLayout>
+<LinearLayout
+			    android:layout_width="fill_parent"
+			    android:layout_height="48dp"
+			    android:orientation="vertical"
+			    android:weightSum="1" >
+
+				<LinearLayout
+				    android:layout_width="fill_parent"
+				    android:layout_height="48dp"
+				    android:orientation="vertical"
+				    android:weightSum="1" >
+
+				    <TextView
+				        android:id="@+id/TextView01"
+				        android:layout_width="wrap_content"
+				        android:layout_height="wrap_content"
+				        android:text="ランキングネーム"
+				        android:textColor="@color/blue_color"
+				        android:textSize="20sp" />
+
+				    <TextView
+				        android:id="@+id/LankName"
+				        android:layout_width="272dp"
+				        android:layout_height="wrap_content"
+				        android:text="name"
+				        android:textColor="@color/character_color"
+				        android:textSize="20sp" />
+				</LinearLayout>
+
+
+				    
+				    
+			</LinearLayout>
+			<LinearLayout
+			    android:layout_width="288dp"
+			    android:layout_height="wrap_content"
+			    android:layout_gravity="center"
+			    android:orientation="horizontal"
+			    android:weightSum="1" >
+
+				<Button
+				    android:id="@+id/Button01"
+				    android:layout_width="wrap_content"
+				    android:layout_height="wrap_content"
+				    android:layout_weight="0.34"
+				    android:onClick="LankUpLoad"
+				    android:overScrollMode="ifContentScrolls"
+				    android:text="ランキング登録"
+				    android:textSize="20sp" />
+
+				<Button
+				    android:id="@+id/Button03"
+				    android:layout_width="wrap_content"
+				    android:layout_height="wrap_content"
+				    android:layout_weight="0.42"
+				    android:onClick="LankUpdate"
+				    android:overScrollMode="ifContentScrolls"
+				    android:text="更新"
+				    android:textSize="20sp" />
+			</LinearLayout>  
+			    
+      </LinearLayout>
+</ScrollView>
+
+
