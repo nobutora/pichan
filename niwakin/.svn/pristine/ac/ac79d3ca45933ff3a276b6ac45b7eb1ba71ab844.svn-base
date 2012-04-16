@@ -1,0 +1,350 @@
+using UnityEngine;
+using System.Collections;
+
+public class GUITextureMove : MonoBehaviour {
+	
+	public GameObject backTexture ;
+
+	public GameObject logTexture ;
+
+	public GameObject chikinTexture ;
+
+	public GameObject highscoreTexture ;
+
+	public GameObject scoreTexture ;
+	
+	public GUISkin castamGUI ;
+	
+	//public GUIText guitext;
+
+	private GameManager GM_MANE;
+
+	private float timerUpdate = 0.0f;
+
+	private const float TIMER_MAX = 1.0f;
+	
+	private float[] LogMove;
+	private float[] LogMoveFirst;
+	
+	int score = 0;
+	
+	float nowsize = 0.0f;
+	
+	GameObject feed;
+
+	// Use this for initialization
+	void Start () {
+		LogMoveSetting();
+		//GM_MANE = GameManager.Instance;
+		score = Library.getHightScore();
+				
+		feed = GameObject.FindGameObjectWithTag( "FeedIn" );
+
+		//castamGUI.label.fontSize  = (int)( 110.0f *  GameManager.Instance.getScreenW() );
+	}
+	
+	// Update is called once per frame
+	void Update () {
+
+		if( nowsize != GameManager.Instance.getScreenW_GUI() )
+		{
+			castamGUI.button.fontSize = (int)( 50.0f *  GameManager.Instance.getScreenW_GUI() );
+		}
+
+		//Vector3 pos = Input.mousePosition;
+        //Rect newPos = this.guiTexture.pixelInset;
+        // スクリーン座標を GUI 座標に変換
+        //newPos.x =  Screen.width / 2;
+        //newPos.y =  Screen.height / 2;
+        //this.guiTexture.pixelInset = newPos;
+		
+		//END
+		if(Application.platform == RuntimePlatform.Android)
+		{
+			if(Input.GetKey(KeyCode.Escape))
+			{
+				Application.Quit();
+			}
+		}
+		
+		
+		
+		
+	}
+		
+	void LogMoveSetting()
+	{
+		LogMove = new float [4];
+
+		LogMove[0] = 600;
+		LogMove[1] = 600;
+		LogMove[2] = 600;
+		LogMove[3] = 300;
+
+
+		LogMoveFirst = new float [4];
+		
+		
+		LogMoveFirst[0] = logTexture.transform.localPosition.y;
+		logTexture.transform.localPosition = new Vector3(
+				logTexture.transform.localPosition.x,
+				LogMoveFirst[0] + LogMove[0] ,
+				logTexture.transform.localPosition.z );
+
+		LogMoveFirst[1] = chikinTexture.transform.localPosition.x;
+		chikinTexture.transform.localPosition = new Vector3(
+				LogMoveFirst[1] + LogMove[1],
+				chikinTexture.transform.localPosition.y ,
+				chikinTexture.transform.localPosition.z );
+
+
+		LogMoveFirst[2] = highscoreTexture.transform.localPosition.x;
+		highscoreTexture.transform.localPosition = new Vector3(
+				LogMoveFirst[2] - LogMove[2],
+				highscoreTexture.transform.localPosition.y ,
+				highscoreTexture.transform.localPosition.z );
+
+		LogMoveFirst[3] = scoreTexture.transform.localPosition.x;
+		scoreTexture.transform.localPosition = new Vector3(
+				LogMoveFirst[3] - LogMove[2],
+				scoreTexture.transform.localPosition.y ,
+				-3.0f );
+	}
+	
+	void Awake(){
+    	//guiText.material.color = new Color(0.0f,0.0f,0.0f);
+	}
+	
+	void OnGUI () 
+	{
+		if( feed != null )
+		{
+			return;
+		}
+
+
+		float toushdown = 0.0f;
+		if(Library.getToush())
+		{
+			toushdown = 4.0f;
+		}
+
+		GUI.skin = castamGUI;
+		
+		timerUpdate += Time.deltaTime;
+
+		GameManager manager = GameManager.Instance;
+		//Back
+
+		//LOG
+		if( LogMove[0] > 0)
+		{
+			LogMove[0] -= Time.deltaTime * 500 + toushdown;
+			logTexture.transform.localPosition = new Vector3(
+				logTexture.transform.localPosition.x,
+				LogMoveFirst[0] + LogMove[0] ,
+				logTexture.transform.localPosition.z );
+			return;
+		}else
+		{
+			if( LogMove[0] > -100.0f)
+			{
+				LogMove[0] = -100.0f;
+				logTexture.transform.localPosition = new Vector3(
+					logTexture.transform.localPosition.x,
+					LogMoveFirst[0] ,
+					logTexture.transform.localPosition.z );
+	
+				GameObject refObj = (GameObject)Resources.Load("Sound/sound_se_Title");			
+				GameObject obj = (GameObject)Instantiate( refObj );
+			}
+		}
+		//Chikin
+
+		if( LogMove[1] > 0)
+		{
+			LogMove[1] -= Time.deltaTime * 500 + toushdown;
+			chikinTexture.transform.localPosition = new Vector3(
+				LogMoveFirst[1] + LogMove[1] ,
+				chikinTexture.transform.localPosition.y,
+				chikinTexture.transform.localPosition.z );
+			//return;
+		}else
+		{
+			LogMove[1] = 0.0f;
+			chikinTexture.transform.localPosition = new Vector3(
+				LogMoveFirst[1],
+				chikinTexture.transform.localPosition.y,
+				chikinTexture.transform.localPosition.z );
+
+		}
+
+		
+		//HIGHSCORE
+		if( LogMove[2] > 0)
+		{
+			LogMove[2] -= Time.deltaTime * 500 + toushdown;
+			highscoreTexture.transform.localPosition = new Vector3(
+				LogMoveFirst[2] - LogMove[2] ,
+				highscoreTexture.transform.localPosition.y,
+				highscoreTexture.transform.localPosition.z );
+
+			scoreTexture.transform.localPosition = new Vector3(
+				LogMoveFirst[3] - LogMove[2] ,
+				scoreTexture.transform.localPosition.y,
+				scoreTexture.transform.localPosition.z );
+			
+			return;
+		}else
+		{
+			if( LogMove[2] > -100.0f)
+			{
+				LogMove[2] = -100.0f;
+				highscoreTexture.transform.localPosition = new Vector3(
+					LogMoveFirst[2] ,
+					highscoreTexture.transform.localPosition.y,
+					highscoreTexture.transform.localPosition.z );
+	
+				scoreTexture.transform.localPosition = new Vector3(
+					LogMoveFirst[3] ,
+					scoreTexture.transform.localPosition.y,
+					scoreTexture.transform.localPosition.z );
+				GameObject refObj = (GameObject)Resources.Load("Sound/sound_se_Title");			
+					GameObject obj = (GameObject)Instantiate( refObj );
+			}
+		}
+		//SCORE
+		string str =  score.ToString();
+		
+		GUI.color = new Color(0.0f,0.0f,0.0f);
+		
+		//GUI.skin.label.fontSize = 40;
+		//score = 1000000 ;
+		int scoreNum = score;
+		int len = 0;
+		while(scoreNum >= 10)
+		{
+			scoreNum /= 10;
+			len++;
+		}
+		
+		
+		//GUI.Label( new Rect(
+		//	(220  - LogMove[2] - len * 15 )  * manager.getScreenW() ,
+		//	(310 ) * manager.getScreenH() ,
+		//	1200,
+		//	1200 ),str);
+		GUI.color = new Color(1.0f,1.0f,1.0f);
+		
+#if false
+		GUI.TextField(new Rect(
+			(20  - LogMove[2] )  * manager.getScreenW() ,
+			(200 ) * manager.getScreenH() ,
+			highscoreTexture.width * manager.getScreenW(),
+			 highscoreTexture.height * manager.getScreenH() ), str);
+#endif
+		
+		
+		//guitext.text = str;
+		//guiText.material.color = new Color(0.0f,0.0f,0.0f);
+
+		if( LogMove[2] > 0)
+		{
+			LogMove[2] -= Time.deltaTime * 220 + toushdown;
+			return;
+		}else
+		{
+			//LogMove[2] = 0.0f;
+		}
+		// komando
+		titleDraw(LogMove[3]);
+		if( LogMove[3] > 0)
+		{
+			LogMove[3] -= Time.deltaTime * 220 + toushdown;
+			return;
+		}else
+		{
+			LogMove[3] = 0.0f;
+		}
+	}
+
+
+
+
+	private void titleDraw(float yMove)
+	{
+		int w = 200;
+		int h = 100;
+		
+		int x = 50;
+		int y = (int)(380 + yMove);
+		int movex = 250;
+		int movey = -50;
+
+		string lvStr = "";
+
+		int nowSave = Library.getLvSave();
+		if( nowSave == 0)
+		{
+			lvStr = "Normal";
+		}else if( nowSave == 1){
+			lvStr = "Hard";
+		}else if( nowSave == 2){
+			lvStr = "Hell";	
+		}
+				
+		if( GUI.Button( new Rect(
+			(x + movex) * GameManager.Instance.getScreenW_GUI() ,
+			(y + movey * 3) * GameManager.Instance.getScreenH_GUI() ,
+			(w  ) * GameManager.Instance.getScreenW_GUI() ,
+			(h ) * GameManager.Instance.getScreenH_GUI() )
+			, lvStr ) )
+		{
+			Library.LvSave( Library.getLvSave() + 1 );
+		}
+
+
+		if( GUI.Button( new Rect(
+			(x + movex) * GameManager.Instance.getScreenW_GUI() ,
+			(y + movey) * GameManager.Instance.getScreenH_GUI() ,
+			(w  ) * GameManager.Instance.getScreenW_GUI() ,
+			(h + 50) * GameManager.Instance.getScreenH_GUI() )
+			, "Start" ) )
+		{
+			GameObject refObj = (GameObject)Resources.Load("Sound/sound_se_Menu");			
+				GameObject obj = (GameObject)Instantiate( refObj );
+
+			Application.LoadLevel("gamebody");
+		}
+
+		if( GUI.Button( new Rect( 
+			x * GameManager.Instance.getScreenW_GUI() ,
+			y * GameManager.Instance.getScreenH_GUI() ,
+			w * GameManager.Instance.getScreenW_GUI() ,
+			h * GameManager.Instance.getScreenH_GUI() )
+			, "Help" ) )
+		{
+			gohelp();
+		}
+		
+		if( GUI.Button( new Rect( 
+			(x + movex * 2 ) * GameManager.Instance.getScreenW_GUI() ,
+			y * GameManager.Instance.getScreenH_GUI() ,
+			w * GameManager.Instance.getScreenW_GUI() ,
+			h * GameManager.Instance.getScreenH_GUI() )
+			, "Site" ) )
+		{
+			gosite();
+		}
+	}
+	
+	private void gohelp()  
+	{
+		Library.openWebSite("http://fagstudio.com/");
+	}
+	
+	private void gosite()   
+	{
+		Library.openWebSite("http://fagstudio.com/");
+	}
+}

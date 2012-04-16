@@ -1,0 +1,90 @@
+using UnityEngine;
+using System.Collections;
+
+/// <summary>
+/// auto scroll system
+/// </summary>
+public class ScrollBehaviour : MonoBehaviour {
+	
+	const float scroll_const = -2.0f * 60.0f;	// const scroll value
+	
+	/// <summary>
+	/// Scroll this instance.
+	/// </summary>
+	protected virtual void Scroll()
+	{
+		addPositionX( getOneScrollValue() );
+	}
+	protected virtual void Scroll(float num)
+	{
+		addPositionX( getOneScrollValue() / num);
+	}
+	
+	/// <summary>
+	/// Gets the one scroll value.
+	/// </summary>
+	/// <returns>
+	/// The one scroll value.
+	/// </returns>
+	protected float getOneScrollValue()
+	{
+		float val = scroll_const  * (1+ GameManager.Instance.GameLevel * 0.1f ) ;//* GameManager.Instance.getScreenW();
+		return ScrollManager.Instance.ScrollVelocityScale * val * Time.deltaTime;
+	}
+	
+	/// <summary>
+	/// 座標を設定
+	/// </summary>
+	/// <param name="position">
+	/// A <see cref="Vector2"/>
+	/// </param>
+	public virtual void setPosition( Vector2 position )
+	{
+		transform.localPosition = new Vector3(position.x,position.y,transform.localPosition.z);	
+	}
+	/// <summary>
+	/// Ｘ座標を設定
+	/// </summary>
+	/// <param name="v">
+	/// A <see cref="System.Single"/>
+	/// </param>
+	public virtual void setPositionX( float v )
+	{
+		transform.localPosition = new Vector3(v,transform.localPosition.y,transform.localPosition.z);
+	}
+	/// <summary>
+	/// Ｙ座標を設定
+	/// </summary>
+	/// <param name="v">
+	/// A <see cref="System.Single"/>
+	/// </param>
+	public virtual void setPositionY( float v )
+	{
+		transform.localPosition = new Vector3(transform.localPosition.x,v,transform.localPosition.z);
+	}
+	
+	/// <summary>
+	/// Ｘ座標に加算
+	/// </summary>
+	/// <param name="v">
+	/// A <see cref="System.Single"/>
+	/// </param>
+	public void addPositionX( float v )
+	{
+		Vector3 vPos = transform.localPosition;
+		vPos.x += v;
+		transform.localPosition = vPos;
+	}
+	/// <summary>
+	/// Ｙ座標に加算
+	/// </summary>
+	/// <param name="v">
+	/// A <see cref="System.Single"/>
+	/// </param>
+	public void addPositionY( float v )
+	{
+		Vector3 vPos = transform.localPosition;
+		vPos.y += v;
+		transform.localPosition = vPos;
+	}
+}

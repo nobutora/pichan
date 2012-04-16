@@ -1,0 +1,206 @@
+﻿using UnityEngine;
+using System.Collections;
+
+public class EnemyBase : MonoBehaviour {
+	
+	/// <summary>
+	/// フロー
+	/// </summary>
+	protected enum FLOW
+	{
+		INIT = 0,
+		MOVE,
+		END,
+		EXIT,
+	}
+	/// <summary>
+	/// !フロー
+	/// </summary>
+	private FLOW flow;
+	/// <summary>
+	/// フロー
+	/// </summary>
+	protected FLOW Flow
+	{
+		get { return flow; }	
+	}
+	
+	/// <summary>
+	/// ステップ
+	/// </summary>
+	private uint mStep;
+	/// <summary>
+	/// ステップ
+	/// </summary>
+	protected uint Step
+	{
+		get { return mStep; }	
+	}
+	
+	/// <summary>
+	/// 基本タイマー
+	/// </summary>
+	private float mTimer;
+	/// <summary>
+	/// タイマー
+	/// </summary>
+	protected float Timer
+	{
+		get { return mTimer; }
+		set { mTimer = value; }
+	}
+	
+	/// <summary>
+	/// 終了したかどうか
+	/// </summary>
+	/// <returns>
+	/// A <see cref="System.Boolean"/>
+	/// </returns>
+	public bool isEnd()
+	{
+		if( flow == EnemyBase.FLOW.EXIT )
+		{
+			return true;
+		}
+		return false;
+	}
+
+	
+	/// <summary>
+	/// フローを初期化
+	/// </summary>
+	protected void initFlow()
+	{
+		flow = FLOW.INIT;
+	}
+	
+	/// <summary>
+	/// フローを再生
+	/// </summary>
+	public void playFlow()
+	{
+		if( flow == FLOW.INIT )
+		{
+			flow = FLOW.MOVE;	
+		}
+	}
+	
+	/// <summary>
+	/// フローを設定
+	/// </summary>
+	/// <param name="flow">
+	/// A <see cref="FLOW"/>
+	/// </param>
+	protected void nextFlow( FLOW flow )
+	{
+		if( flow == EnemyBase.FLOW.END ) {
+			flow = FLOW.EXIT;	
+		}
+		this.flow = flow;
+	}
+	
+	// Use this for initialization
+	void Start () {
+		flow = EnemyBase.FLOW.INIT;
+		
+		mStep = 0;
+		mTimer = 0;
+	}
+	
+	public EnemyBase()
+	{
+		initFlow();	
+	}
+	
+	void Update()
+	{
+		Move();	
+	}
+	
+	/// <summary>
+	/// エネミーシステムの基本、必ずマイフレーム継承先から呼ぶこと
+	/// </summary>
+	protected void Move () {
+		mTimer += Time.deltaTime;
+	}
+	
+
+	
+		/// <summary>
+	/// ステップ変更
+	/// </summary>
+	/// <param name="step">
+	/// A <see cref="System.Int32"/>
+	/// </param>
+	protected void NextStep( uint step )
+	{
+		mTimer = 0;
+		mStep = step;
+	}
+	
+	/// <summary>
+	/// 座標を設定
+	/// </summary>
+	/// <param name="position">
+	/// A <see cref="Vector2"/>
+	/// </param>
+	public virtual void setPosition( Vector2 position )
+	{
+		transform.localPosition = new Vector3(position.x,position.y,transform.localPosition.z);	
+	}
+	/// <summary>
+	/// Ｘ座標を設定
+	/// </summary>
+	/// <param name="v">
+	/// A <see cref="System.Single"/>
+	/// </param>
+	public virtual void setPositionX( float v )
+	{
+		transform.localPosition = new Vector3(v,transform.localPosition.y,transform.localPosition.z);
+	}
+	/// <summary>
+	/// Ｙ座標を設定
+	/// </summary>
+	/// <param name="v">
+	/// A <see cref="System.Single"/>
+	/// </param>
+	public virtual void setPositionY( float v )
+	{
+		transform.localPosition = new Vector3(transform.localPosition.x,v,transform.localPosition.z);
+	}
+	/// <summary>
+	/// Ｙ座標を設定
+	/// </summary>
+	/// <param name="v">
+	/// A <see cref="System.Single"/>
+	/// </param>
+	public virtual void setPositionZ( float v )
+	{
+		transform.localPosition = new Vector3(transform.localPosition.x,transform.localPosition.y,v);
+	}
+	
+	/// <summary>
+	/// Ｘ座標に加算
+	/// </summary>
+	/// <param name="v">
+	/// A <see cref="System.Single"/>
+	/// </param>
+	public void addPositionX( float v )
+	{
+		Vector3 vPos = transform.localPosition;
+		vPos.x += v;
+		transform.localPosition = vPos;
+	}
+	/// <summary>
+	/// Ｙ座標に加算
+	/// </summary>
+	/// <param name="v">
+	/// A <see cref="System.Single"/>
+	/// </param>
+	public void addPositionY( float v )
+	{
+		Vector3 vPos = transform.localPosition;
+		vPos.y += v;
+		transform.localPosition = vPos;
+	}
+}

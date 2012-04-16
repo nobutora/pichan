@@ -1,0 +1,32 @@
+Shader "Hidden/QuadUI/editor" 
+{
+	Properties 
+	{
+		_Color ("Tint", Color) = (1.0, 1.0, 1.0, 1.0)
+		_MainTex ("RGB(A)", 2D) = "white" {}
+	}
+	
+	Category 
+	{
+		Lighting Off
+		Blend SrcAlpha OneMinusSrcAlpha
+		
+		BindChannels 
+		{
+			Bind "Color", color
+		}
+		
+		SubShader 
+		{
+			Tags {"Queue" = "Transparent" }
+			Pass 
+			{
+				SetTexture [_MainTex] 
+				{
+					constantColor [_Color]
+					Combine previous  * constant, previous * constant
+				}
+			}
+		}
+	}
+}

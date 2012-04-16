@@ -1,0 +1,205 @@
+﻿using UnityEngine;
+using System.Collections;
+
+public class Pole00 : EnemyBase {
+	
+	// TEST DESU ss
+
+	public int type = 0;
+
+	private const int TYPE_HOMING = 1;
+	private const int TYPE_HOMING_NEO = 2;
+
+	private float mAcc;
+	
+	private Quad2D sprite;
+	private int counter = 0;
+	// Use this for initialization
+	void Start () {
+		sprite = (Quad2D)GetComponent(typeof(Quad2D));
+		
+		Vector3 vPos = transform.localPosition;
+		
+		//! 初回のX座標は固定
+		vPos.x = GameManager.ScreenSize.x + 50.0f;
+		
+		vPos.z = 0;
+		if(type == TYPE_HOMING)
+		{
+			if( PlayerManager.Instance != null )
+			{
+				float y = PlayerManager.Instance.GetPlayerY();
+				vPos.y = y + Random.Range( -60.0f, 60.0f );
+			}
+		}
+
+
+		//if(type >= GameManager.Instance.GameLevel)
+		//{
+		//	if( Random.Range( 0 , 5) == 0)
+		//	{
+		//		type = TYPE_HOMING_NEO;
+		//	}
+		//}
+		
+		transform.localPosition = vPos;
+		transform.localScale = Vector3.one;
+		
+		transform.localScale = new Vector3( 1.0f, 1.0f, 1.0f );
+
+
+		//! 行動フロー
+		mAcc = 0;
+	}
+	
+	// Update is called once per frame
+	void Update () {
+		//! 初期状態
+		if(GameManager.Instance.isStop())
+		{
+			return;
+		}
+
+		if( Flow == FLOW.INIT ) {
+			counter++;
+			if(counter >= 100)
+			{
+				playFlow();
+			}
+			return;
+		}
+		
+		base.Move();
+		MoveAfter();
+		
+		Vector3 vPos = transform.localPosition;
+		if( vPos.x < -60 ) {
+			//! 終了
+			//nextFlow( FLOW.EXIT );
+			GameObject.DestroyObject( gameObject );
+		}
+	}
+	
+	/// <summary>
+	/// 行動フロー
+	/// </summary>
+	void MoveAfter() 
+	{
+		bool bNextFlag = false;
+		switch( Step )
+		{
+		case 0: //! 移動
+			float time = 0.4f;
+			
+			if(GameManager.Instance.getScore() >= 100)
+			{
+				//time = time / (1.0f + GameManager.Instance.GameLevel * 0.25f );
+				time = time / (1.0f + GameManager.Instance.GameLevel * 0.1f );
+			}else{
+				time = time / (1.0f + GameManager.Instance.GameLevel * 0.1f );
+			}
+
+			if( Timer >= time ) {
+				Timer = time;
+				bNextFlag = true;
+			}
+			float x = Mathf.Lerp( GameManager.ScreenSize.x + 50.0f, GameManager.ScreenSize.x-70.0f, Timer/time );
+			setPositionX( x );
+			if( bNextFlag ) {
+				NextStep( 1 );
+			}
+			break;
+			
+		case 1:	//! 停止
+
+			float next = 0.2f ;
+			
+			if(GameManager.Instance.getScore() >= 100)
+			{
+				//next = next / (1.0f + GameManager.Instance.GameLevel * 0.20f );
+				next = next / (1.0f + GameManager.Instance.GameLevel * 0.1f );
+			}else{
+				next = next / (1.0f + GameManager.Instance.GameLevel * 0.1f );
+			}
+			
+			if( Timer > next ) {
+				NextStep( 2 );	
+			}
+			break;
+			
+		case 2:	//! 突進
+			{
+				mAcc=2.9f;
+				float move = 10.0f;
+				if(GameManager.Instance.getScore() >= 100)
+				{
+					//move = move * (1.0f + GameManager.Instance.GameLevel * 0.30f );
+					move = move * (1.0f + GameManager.Instance.GameLevel * 0.1f );
+				}else{
+					move = move * (1.0f + GameManager.Instance.GameLevel * 0.1f );
+				}
+			
+				float v = move * Timer + mAcc * Timer * Timer / 2;
+				addPositionX( -v );
+
+				if( type == TYPE_HOMING_NEO)
+				{
+					float y = PlayerManager.Instance.GetPlayerY();
+					if(y != 0)
+					{
+						if(y > transform.localPosition.y )
+						{
+							addPositionY( v /10);	
+						}else
+						{
+							addPositionY( -v/10 );							
+						}
+					}
+				}
+			
+			}	break;
+				
+		}
+	}
+	
+	
+	//ぶつかった時
+	void OnTriggerEnter( Collider col )
+	{
+		if( col.tag == "Enemy")
+		{
+			//Vector3 position = new Vector3( transform.position.x ,
+			//	transform.position.y + 10 , 1 );
+			//transform.position = position;
+		}
+		//! 当たった相手がぷれいやー　
+		if( col.tag == "Player" ||
+		   col.tag == "FriendMember"||
+			col.tag == Library.FlameTag )
+		{			
+			GameObject refObj = (GameObject)Resources.Load("Effect/birst");			
+			//GameObject refObj = (GameObject)Resources.Load("Effect/birstobj");			
+
+			//! 作成
+			GameObject obj = (GameObject)Instantiate( refObj );
+			//obj.transform.parent = transform;
+			//obj.transform.localPosition = transform.localPosition;
+			Vector3 position = new Vector3( transform.position.x ,
+				transform.position.y , 1 );
+			obj.transform.position = position;
+
+			GameObject efParent = GameObject.Find( "EnemyManager" );
+
+			obj.transform.parent = efParent.transform ;
+			//float size = 2.0f;			
+			//Vector3 scale = new Vector3( size , size , 1.0f);
+			//obj.transform.localScale = scale;
+			
+			
+			GameObject.DestroyObject( gameObject );
+		}
+	}
+
+	
+
+}

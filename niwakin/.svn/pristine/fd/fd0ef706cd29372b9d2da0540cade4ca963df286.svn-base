@@ -1,0 +1,43 @@
+using UnityEngine;
+
+using System.Collections;
+
+
+
+public class soundMove : MonoBehaviour {
+
+	public AudioClip Source;
+
+	public int type;
+
+	// Use this for initialization
+
+	void Start () {
+
+		StartCoroutine( PlaySound() );
+	}
+
+	IEnumerator PlaySound(){
+
+		audio.PlayOneShot( this.Source );
+
+		yield return new WaitForSeconds(this.Source.length);
+		
+
+		Library.addSeNum(type, -1);
+		Destroy( gameObject );
+
+	}
+
+	
+
+	// Update is called once per frame
+
+	void Update () {
+
+	
+
+	}
+
+}
+

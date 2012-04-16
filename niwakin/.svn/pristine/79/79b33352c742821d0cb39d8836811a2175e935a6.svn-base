@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+	<Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+	<Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+	<ProductVersion>10.0.20506</ProductVersion>
+	<SchemaVersion>2.0</SchemaVersion>
+	<ProjectGuid>{F1B99938-4773-8EF8-C326-FC2F81B116E2}</ProjectGuid>
+	<OutputType>Library</OutputType>
+	<AppDesignerFolder>Properties</AppDesignerFolder>
+	<RootNamespace></RootNamespace>
+	<AssemblyName>Assembly-CSharp-firstpass</AssemblyName>
+	<TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+	<FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+	<DebugSymbols>true</DebugSymbols>
+	<DebugType>full</DebugType>
+	<Optimize>false</Optimize>
+	<OutputPath>Temp\bin\Debug\</OutputPath>
+	<DefineConstants>DEBUG;TRACE;UNITY_3_5_0;UNITY_3_5;UNITY_EDITOR;ENABLE_PROFILER;UNITY_WEBPLAYER;ENABLE_GENERICS;ENABLE_DUCK_TYPING;ENABLE_TERRAIN;ENABLE_MOVIES;ENABLE_WEBCAM;ENABLE_MICROPHONE;ENABLE_NETWORK;ENABLE_CLOTH;ENABLE_WWW;ENABLE_SUBSTANCE</DefineConstants>
+	<ErrorReport>prompt</ErrorReport>
+	<WarningLevel>4</WarningLevel>
+	<NoWarn>0169</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+	<DebugType>pdbonly</DebugType>
+	<Optimize>true</Optimize>
+	<OutputPath>Temp\bin\Release\</OutputPath>
+	<DefineConstants>TRACE</DefineConstants>
+	<ErrorReport>prompt</ErrorReport>
+	<WarningLevel>4</WarningLevel>
+	<NoWarn>0169</NoWarn>
+  </PropertyGroup>
+  <ItemGroup>
+	<Reference Include="System" />
+    <Reference Include="System.XML" />
+	<Reference Include="System.Core" />
+	<Reference Include="UnityEngine">
+	  <HintPath>/Applications/Unity/Unity.app/Contents/Frameworks/Managed/UnityEngine.dll</HintPath>
+	</Reference>
+	<Reference Include="UnityEditor">
+	  <HintPath>/Applications/Unity/Unity.app/Contents/Frameworks/Managed/UnityEditor.dll</HintPath>
+	</Reference>
+  </ItemGroup>
+  <ItemGroup>
+     <Compile Include="Assets\Plugins\LinkedSpriteManager.cs" />
+     <Compile Include="Assets\Plugins\Sprite.cs" />
+     <Compile Include="Assets\Plugins\SpriteManager.cs" />
+     <Compile Include="Assets\Plugins\eqeq\QuadUI\Animation\TimescaleIndependentAnimation.cs" />
+     <Compile Include="Assets\Plugins\eqeq\QuadUI\Base\Quad2D.cs" />
+     <Compile Include="Assets\Plugins\eqeq\QuadUI\Base\QuadUI.cs" />
+     <Compile Include="Assets\Plugins\eqeq\QuadUI\Event System\Core\EQEQEvent.cs" />
+     <Compile Include="Assets\Plugins\eqeq\QuadUI\Event System\Core\EventDispatcher.cs" />
+     <Compile Include="Assets\Plugins\eqeq\QuadUI\Event System\Events\ScreenEvent.cs" />
+     <Compile Include="Assets\Plugins\eqeq\QuadUI\Event System\Events\UIEvent.cs" />
+     <Compile Include="Assets\Plugins\eqeq\QuadUI\Screens\Screen2D.cs" />
+     <Compile Include="Assets\Plugins\eqeq\QuadUI\Screens\Screen2DManager.cs" />
+     <Compile Include="Assets\Plugins\eqeq\QuadUI\Screens\Screen2DTransition.cs" />
+     <Compile Include="Assets\Plugins\eqeq\QuadUI\UI Components\Button2D.cs" />
+     <Compile Include="Assets\Plugins\eqeq\QuadUI\UI Components\Complex\Clock2D.cs" />
+     <Compile Include="Assets\Plugins\eqeq\QuadUI\UI Components\Complex\ComplexComponent2D.cs" />
+     <Compile Include="Assets\Plugins\eqeq\QuadUI\UI Components\Complex\Counter2D.cs" />
+     <Compile Include="Assets\Plugins\eqeq\QuadUI\UI Components\Complex\ResizableBar2D.cs" />
+     <Compile Include="Assets\Plugins\eqeq\QuadUI\UI Components\Complex\Toolbar2D.cs" />
+     <Compile Include="Assets\Plugins\eqeq\QuadUI\UI Components\Complimentary\FluidElement2D.cs" />
+     <Compile Include="Assets\Plugins\eqeq\QuadUI\UI Components\Complimentary\PaddedElement2D.cs" />
+     <Compile Include="Assets\Plugins\eqeq\QuadUI\UI Components\Complimentary\UILabel2D.cs" />
+     <Compile Include="Assets\Plugins\eqeq\QuadUI\UI Components\Element2D.cs" />
+     <Compile Include="Assets\Plugins\eqeq\QuadUI\UI Components\InteractiveElement2D.cs" />
+     <Compile Include="Assets\Plugins\eqeq\QuadUI\UI Components\MultiStateSprite2D.cs" />
+     <Compile Include="Assets\Plugins\eqeq\QuadUI\UI Components\Repeater2D.cs" />
+     <Compile Include="Assets\Plugins\eqeq\QuadUI\UI Components\Sprite2D.cs" />
+     <Compile Include="Assets\Plugins\eqeq\QuadUI\UI Components\Toggle2D.cs" />
+     <None Include="Assets\Editor\QuadUI\Editor Shader\editor2D.shader" />
+     <None Include="Assets\Shaders\QuadUI\2D Backface Culled.shader" />
+     <None Include="Assets\SU3DJPFont\list.txt" />
+     <None Include="Assets\SU3DJPFont\license.txt" />
+     <None Include="Assets\SU3DJPFont\readme.txt" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+	   Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+  
+</Project>

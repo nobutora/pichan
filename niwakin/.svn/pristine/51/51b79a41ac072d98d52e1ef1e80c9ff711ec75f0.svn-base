@@ -1,0 +1,186 @@
+﻿using UnityEngine;
+using System.Collections;
+
+public class EnemyManager : MonoBehaviour {
+	
+	/// <summary>
+	/// 自分自身のインスタンス
+	/// このクラスはシングルトンであるべき
+	/// </summary>
+	private static EnemyManager mInstance;
+	
+	/// <summary>
+	/// 登録するトラップ
+	/// </summary>
+	public GameObject[]	RegistrationTraps;	
+	private GameObject[] NextTraps;	//! 次回予約トラップオブジェクト
+	private bool bReadyCreate;		//! 作成準備フラグ
+	private bool bNextCreate;		//! 次のを作る
+	
+
+	//ITEM_TIPE
+	private const int ENEMY_LV1  = 0;
+	private const int ENEMY_LV2  = 1;
+	private const int ENEMY_LV3  = 2;
+	private const int ENEMY_LV4  = 3;
+	private const int ENEMY_LV5  = 4;
+	private const int ENEMY_MAX  = 5;
+
+	private float[] ENEMY_INSTANS;
+	private float[] enemy_instans;
+
+	private float chikin_instans;
+	private float CHIKIN_INSTANS = 2.1f;
+
+	/// <summary>
+	/// 自分自身をかえします
+	/// </summary>
+	public static EnemyManager Instance
+	{
+		get { return mInstance; }	
+	}
+	
+	// Use this for initialization
+	void Start () {
+		NextTraps = new GameObject[ENEMY_MAX];
+		bReadyCreate = true;
+		bNextCreate = false;
+		
+		setupNextTraps();
+
+		firstSetting();
+		setChikinInstans();
+	
+	
+
+	}
+	
+	// Update is called once per frame
+	void Update () {
+		
+		if(GameManager.Instance.isStop())
+		{
+			return;
+		}
+
+		chikin_instans -= Time.deltaTime;
+		if(chikin_instans <= 0)
+		{
+			setChikinInstans();
+			next();
+		}
+		// taiki
+		if( GameManager.Instance.isPlaying() == false)
+		{ 	
+			return;
+		}
+		for(int i = 0 ; i < GameManager.Instance.GameLevel + 1 ; i++)
+		{
+			if( i >= ENEMY_MAX)
+			{
+				break;
+			}
+			enemy_instans[i] -= Time.deltaTime;
+			if(enemy_instans[i] <= 0)
+			{
+				GameObject obj = (NextTraps[i]);
+				if( obj )
+				{
+					GameObject trap = (GameObject)Instantiate( obj );
+						trap.transform.parent = transform;
+						trap.transform.localPosition = Vector3.zero;
+						trap.transform.localScale = Vector3.one;
+						trap.transform.localRotation = Quaternion.identity;
+					Setinstans(i);
+				}
+			}
+		}
+		
+		
+
+	}
+	
+	//次のターンへ
+	public void next()
+	{
+		//! 作成待ちへ
+		bReadyCreate = true;
+		
+		GameManager man = GameManager.Instance;
+		if( man )
+		{
+			man.setNextFriend();	
+		}
+	}
+	
+	/// <summary>
+	/// 次のトラップを設定
+	/// </summary>
+	public void setupNextTraps()
+	{
+		for( int i = 0; i < ENEMY_MAX; i++)
+		{
+			if( RegistrationTraps[i] != null)
+			{	
+				NextTraps[i] = RegistrationTraps[i];
+			}
+		}
+		bNextCreate = true;
+	}
+	
+	/// <summary>
+	/// 次のトラップを設定
+	/// </summary>
+
+	bool first = false;
+	void firstSetting()
+	{
+
+		ENEMY_INSTANS = new float[ENEMY_MAX];
+		enemy_instans = new float[ENEMY_MAX];
+		
+		
+		//
+		int type = ENEMY_LV1;			
+		ENEMY_INSTANS[type] = 1.5f;
+		//
+		type = ENEMY_LV2;
+		ENEMY_INSTANS[type] = 4;
+		//
+		type = ENEMY_LV3;
+		ENEMY_INSTANS[type] = 10;
+
+		type = ENEMY_LV4;
+		ENEMY_INSTANS[type] = 14;
+		
+		type = ENEMY_LV5;
+		ENEMY_INSTANS[type] = 15;
+
+		for(int i = 0 ; i < ENEMY_MAX ;i++)
+		{
+			Setinstans(i);
+		}
+		first = true;
+				
+	}
+
+	void Setinstans(int type)
+	{
+		float mainusPar = 1.0f;	
+		if(first)
+		{
+			if(GameManager.Instance.GameLevel >= 1)
+			{
+				mainusPar += (GameManager.Instance.GameLevel * 0.1f);
+			}
+		}
+
+		enemy_instans[type] = ENEMY_INSTANS[type] + Random.Range(0.0f , ENEMY_INSTANS[type] / mainusPar );
+	}
+
+	void setChikinInstans()
+	{
+		chikin_instans = CHIKIN_INSTANS + Random.Range(0.0f , CHIKIN_INSTANS );
+	}
+
+}

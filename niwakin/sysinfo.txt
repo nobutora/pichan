@@ -1,0 +1,20 @@
+System:
+  OS: Windows XP Service Pack 3 (5.1.2600)
+  CPU: Intel(R) Core(TM)2 Duo CPU U7600 @ 1.20GHz, count: 2
+  Physical RAM: 2039 MB
+  Addressable RAM: 2048 MB
+
+D3D9:
+  no D3D hardware acceleration
+
+OpenGL:
+  Version: 1.1.0
+  Vendor: Microsoft Corporation
+  Renderer: GDI Generic
+  VRAM: 64 (via fallback)
+  Extensions: GL_WIN_swap_hint GL_EXT_bgra GL_EXT_paletted_texture
+
+User locale: ja-JP
+System locale: ja-JP
+
+Running processes:

@@ -1,0 +1,64 @@
+using UnityEngine;
+using System.Collections;
+
+public class BgmMove : MonoBehaviour {
+	
+	//public AudioClip Source;
+	// Use this for initialization
+	int type = 0;
+
+	int TYPE_START = 1;
+	int TYPE_END = 2;
+	int TYPE_START_SE = 3;
+
+
+	void Start () {
+		//audio.Stop();
+		audio.mute = true;
+	}
+	
+	// Update is called once per frame
+	void Update () {
+		if(type == TYPE_START_SE)
+		{
+		}else
+		if(type == TYPE_START)
+		{
+			audio.mute = false ;
+			if(audio.volume <= 0.60)
+			{
+				audio.volume += Time.deltaTime / 15;
+				//audio.l
+			}
+		}else
+		if(type == TYPE_END)
+		{
+			audio.volume -= Time.deltaTime / 10;
+			if(audio.volume <= 0.0)
+			{
+				DestroyObject(gameObject);
+			}
+		}
+	}
+
+	public void StartBgm()
+	{
+		audio.time = 0;
+		type = TYPE_START;
+		audio.mute = false;
+	}
+	public void StopBgm()
+	{
+		type = TYPE_END;
+	}
+	public void StartSe()
+	{
+		audio.time = 0;
+		type = TYPE_START_SE;
+		audio.mute = false;
+	}
+}
+
+
+
+

@@ -1,0 +1,90 @@
+﻿using UnityEngine;
+using System.Collections;
+
+public class FlameEfMove : EffectBase {
+	
+	private int _uvTieX = 8;
+    private int _uvTieY = 1;
+    public int _fps = 15;
+
+	private float alphe = 0.7f;    	
+	private float animeTime = 0.0f;
+
+	private SpriteManager manager;
+	private Sprite sprite_data;
+	
+	public static int WIDTH_NUM = 32;
+	public static int HEIGHT_NUM = 32;
+
+	private int counter = 0;
+	private static int END_COUNT = 30;
+
+	// Use this for initialization
+	void Start () {
+		
+
+		GameObject obj = GameObject.Find("Flame_MNG") ;
+		manager = (SpriteManager)obj.GetComponent( typeof(SpriteManager));
+	
+		sprite_data = new Sprite();
+
+		sprite_data = manager.AddSprite( 
+			gameObject,
+			 WIDTH_NUM-2, 
+			 HEIGHT_NUM, 0, HEIGHT_NUM, WIDTH_NUM-2, HEIGHT_NUM, false );
+
+		sprite_data.offset.x = 0 ;
+		sprite_data.offset.y = 0 ;
+		//sprite_data.SetSizeXY( WIDTH_NUM, HEIGHT_NUM);
+
+		sprite_data.SetSizeXY( WIDTH_NUM ,
+					HEIGHT_NUM );		
+		
+		GameManager.Instance.addEffect();
+	}
+
+	void OnDestroy()
+	{
+		//clean();
+		GameManager.Instance.delEffect();
+	}
+
+	public void clean()
+	{
+		manager.RemoveSprite( sprite_data );
+
+		sprite_data = null;
+		
+        manager = null;
+		DestroyObject( gameObject );
+	}
+
+
+	// Update is called once per frame
+	void Update () {
+	
+		if(GameManager.Instance.isStop())
+		{
+			return;
+		}
+
+		Vector3 position = new Vector3( 
+			transform.position.x ,
+			transform.position.y + 1,
+			0 );
+		transform.position = position;	
+		
+		int xPoint = WIDTH_NUM * (counter % _uvTieX );
+
+		sprite_data.lowerLeftUV = manager.PixelCoordToUVCoord( xPoint  , 0);
+		sprite_data.SetSizeXY( WIDTH_NUM ,
+					HEIGHT_NUM );
+
+		counter++;
+		if(counter >= END_COUNT)
+		{
+			clean();
+		}
+	}
+	
+}

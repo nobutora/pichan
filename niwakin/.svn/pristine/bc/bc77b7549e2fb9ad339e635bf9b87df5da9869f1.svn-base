@@ -1,0 +1,174 @@
+﻿using UnityEngine;
+using System.Collections;
+
+public class FlameEfMove : EffectBase {
+	
+	private int _uvTieX = 8;
+    private int _uvTieY = 1;
+	
+	public int END_COUNT = 24;
+
+
+	private float[] alphe;    	
+
+	private SpriteManager manager;
+	private Sprite[] sprite_data;
+	
+	public static int WIDTH_NUM = 32;
+	public static int HEIGHT_NUM = 32;
+
+	private int[] counter;
+
+	private float[] counterTime;
+
+	private float[] counterChangeTime;
+	
+	private bool[] endFlame;
+
+	private const int MAX_FLAME = 4;
+
+	// Use this for initialization
+	void Start () {
+		
+
+
+		//firstEffect ( _uvTieX ,  _uvTieY , alphe );
+
+		GameObject obj = GameObject.Find("Flame_MNG") ;
+		manager = (SpriteManager)obj.GetComponent( typeof(SpriteManager));
+	
+		sprite_data = new Sprite[MAX_FLAME];
+
+		counter = new int[MAX_FLAME];
+		counterTime = new float[MAX_FLAME];
+		counterChangeTime = new float[MAX_FLAME];
+		endFlame = new bool[MAX_FLAME];
+		
+		alphe = new float[MAX_FLAME];
+
+		for(int i = 0 ; i < MAX_FLAME; i++)
+		{
+			sprite_data[i] = manager.AddSprite(
+			 gameObject,
+			 WIDTH_NUM , 
+			 HEIGHT_NUM, 0, HEIGHT_NUM, WIDTH_NUM, HEIGHT_NUM, false );
+			setPosisionFlame(i);
+		}
+			
+		
+		GameManager.Instance.addEffect();
+		//SetAlphe(alphe);
+		
+
+
+
+
+	}
+
+	void OnDestroy()
+	{
+		//clean();
+		GameManager.Instance.delEffect();
+	}
+
+	public void clean()
+	{
+		for(int i = 0 ; i < MAX_FLAME; i++)
+		{
+			manager.RemoveSprite( sprite_data[i] );
+			sprite_data[i] = null;
+		}
+		
+        manager = null;
+		DestroyObject( gameObject );
+	}
+
+
+	// Update is called once per frame
+	void Update () {
+	
+		if(GameManager.Instance.isStop())
+		{
+			return;
+		}
+
+		//Vector3 position = new Vector3( 
+		//	transform.position.x ,
+		//	transform.position.y + 1,
+		//	0 );
+		//transform.position = position;	
+		
+		
+
+		for(int i = 0 ; i < MAX_FLAME; i++)
+		{
+			if(endFlame[i] )
+			{
+				continue;
+			}
+			int xPoint = WIDTH_NUM * (counter[i] % _uvTieX );
+
+			sprite_data[i].lowerLeftUV = manager.PixelCoordToUVCoord( xPoint  , 0);
+			//sprite_data[i].offset.x -= Random.Range( 55.0f, 104.0f );
+			
+			sprite_data[i].offset.x += Random.Range( -15.0f, 15.0f );
+			sprite_data[i].offset.y += Random.Range( -15.0f, 15.0f );
+			//alphe[i] -= 0.01f;
+
+			counterTime[i] += Time.deltaTime ;
+			if(counterTime[i] >= counterChangeTime[i])
+			{	
+				counter[i]++;
+				counterTime[i] = 0;
+			}
+			if( counter[i] % _uvTieX == 7)
+			{
+				if(counter[i] >= END_COUNT)
+				{
+					endFlame[i] = true;
+					sprite_data[i].SetSizeXY( 0.0f , 0.0f );
+				}else{
+					setPosisionFlame(i);
+				}
+			}
+		}
+
+		//SetAlphe(alphe);
+		bool endok = true;
+		for(int i = 0 ; i < MAX_FLAME; i++)
+		{
+			if(endFlame[i])
+			{				
+			}else
+			{
+				endok = false;
+				break;
+			}
+		}
+		if(endok)
+		{
+			clean();
+		}
+	}
+	
+	void setPosisionFlame(int number)
+	{
+		sprite_data[number].offset.x = Random.Range( -15.0f, 15.0f );
+		sprite_data[number].offset.y = Random.Range( -15.0f, 15.0f );
+
+
+		Color c ;
+		c.r = 1.0f;
+		c.g = 1.0f;
+		c.b = 1.0f;
+		c.a = Random.Range( 0.2f, 0.6f );
+		sprite_data[number].SetColor(c);
+
+		float size = Random.Range( 40.0f, 80.0f );
+
+		sprite_data[number].SetSizeXY( size,
+					size);
+		counterChangeTime[number] = Random.Range( 0.01f, 0.05f );
+	}
+
+}

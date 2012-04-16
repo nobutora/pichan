@@ -1,0 +1,57 @@
+﻿using UnityEngine;
+using System.Collections;
+
+public class FlameEfMove : EffectBase {
+	
+	private int _uvTieX = 8;
+    private int _uvTieY = 1;
+    public int _fps = 15;
+
+	private float alphe = 0.7f;    	
+	private float animeTime = 0.0f;
+
+	// Use this for initialization
+	void Start () {
+
+		if( GameManager.Instance.getEffectOk() == false)
+		{
+			DestroyObject( gameObject );
+		}
+		transform.localScale = new Vector3( -0.5f, 3.3f, 1.0f );
+
+		firstEffect (_uvTieX , _uvTieY , alphe );
+		GameManager.Instance.addEffect();
+	}
+
+	void OnDestroy()
+	{
+		GameManager.Instance.delEffect();
+	}
+	// Update is called once per frame
+	void Update () {
+	
+		if(GameManager.Instance.isStop())
+		{
+			return;
+		}
+		
+		animeTime = MoveEffect(_uvTieX , _uvTieY , _fps , animeTime);
+		alphe -= 0.03f;
+		SetAlphe(alphe);
+		ScrollMove();
+
+		int ranX = Random.Range(-10 , 10);
+		int ranY = Random.Range(-10 , 10);
+		Vector3 position = new Vector3( 
+			transform.position.x + (float)ranX/10,
+			transform.position.y + (float)ranY/10,
+			1 );
+		transform.position = position;
+
+		if(GetIdxCount() >= _uvTieX )
+		{
+			DestroyObject( gameObject );
+		}
+	}
+	
+}

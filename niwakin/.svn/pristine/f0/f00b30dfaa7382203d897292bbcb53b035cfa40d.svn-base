@@ -1,0 +1,51 @@
+using UnityEngine;
+using System.Collections;
+
+public class chicken_damage : MonoBehaviour {
+	
+	float counter = 0.0f;
+		
+	float MAX_TIME = 4.5f;
+	// Use this for initialization
+	void Start () {
+	
+	}
+	
+	// Update is called once per frame
+	void Update () {
+	
+
+		counter += Time.deltaTime;
+		if( counter >= (MAX_TIME / 2) )
+		{
+			PlayerManager.Instance.SetFlameAll();
+		}
+		if(counter >= 4)
+		{
+			//Chicken Chnge
+			GameObject refObj ;
+	
+			refObj = (GameObject)Resources.Load("Effect/chikin_big");			
+			
+			//! 作成
+			GameObject obj = (GameObject)Instantiate( refObj );
+			GameObject efParent = GameObject.Find( "PlayerManager" );
+			obj.transform.parent = efParent.transform ;
+			
+			Vector3 position = new Vector3( 
+				transform.position.x ,
+				transform.position.y ,
+				1 );
+			obj.transform.position = position;
+			Vector3 scale = new Vector3( 
+				transform.localScale.x /5*4,
+				transform.localScale.y /5*4,
+				1 );
+			obj.transform.localScale = scale;
+				
+	
+	
+			DestroyObject( gameObject );
+		}
+	}
+}
